@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ChevronDown, Calendar, Clock } from 'lucide-react';
+import { appointmentContent } from '@/utils/siteData';
 
 export default function AppointmentSection() {
   return (
@@ -11,8 +12,8 @@ export default function AppointmentSection() {
           
           {/* Left Column: Form */}
           <div className="flex-1 bg-[#f0f6fa] rounded-[2.5rem] p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
-            <h2 className="text-[2.5rem] sm:text-[3rem] font-black text-black mb-10 tracking-tight leading-tight">
-              Book & Appointment
+            <h2 className="text-4xl sm:text-[3rem] font-black text-black mb-10 tracking-tight leading-tight">
+              {appointmentContent.headline}
             </h2>
             
             <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
@@ -28,9 +29,9 @@ export default function AppointmentSection() {
                     defaultValue=""
                   >
                     <option value="" disabled hidden>Select a Doctor</option>
-                    <option value="dr-alex">Dr. Alex Carry - Medical Specialist</option>
-                    <option value="dr-sarah">Dr. Sarah Jenkins - Surgeon</option>
-                    <option value="dr-mike">Dr. Mike Thorne - Cardiologist</option>
+                    {appointmentContent.doctors.map((d) => (
+                      <option key={d.value} value={d.value}>{d.label}</option>
+                    ))}
                   </select>
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                     <ChevronDown className="w-5 h-5" />
@@ -57,7 +58,7 @@ export default function AppointmentSection() {
                 </label>
                 <input 
                   type="tel" 
-                  placeholder="+1 (555) 000-0000"
+                  placeholder={appointmentContent.phonePlaceholder}
                   className="w-full bg-white rounded-xl px-5 py-4 text-gray-800 text-[15px] font-medium outline-none focus:ring-2 focus:ring-[#008de4]/30 shadow-sm border border-transparent focus:border-[#008de4]/50 transition-all placeholder:text-gray-300"
                 />
               </div>
@@ -104,7 +105,7 @@ export default function AppointmentSection() {
                 type="submit"
                 className="mt-4 w-full bg-[#008de4] text-white py-4 rounded-xl font-bold text-[15px] hover:bg-blue-600 hover:-translate-y-[2px] transition-all shadow-[0_10px_20px_rgba(0,141,228,0.25)]"
               >
-                Book Appointment Now
+                {appointmentContent.ctaLabel}
               </button>
               
             </form>
@@ -115,12 +116,11 @@ export default function AppointmentSection() {
             <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-xl">
               <img 
                 src="/appointment-doctor.png" 
-                alt="Female doctor writing on clipboard" 
+                alt="Doctor writing on clipboard" 
                 className="w-full h-full object-cover"
               />
             </div>
             
-            {/* Optional slight decorative shape */}
             <div className="absolute -z-10 -bottom-8 -right-8 w-[200px] h-[200px] bg-blue-100/50 rounded-full blur-3xl"></div>
           </div>
 
