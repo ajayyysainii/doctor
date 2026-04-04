@@ -13,7 +13,7 @@ const CLINIC_IMAGES = [
 export default function ClinicMarquee() {
   return (
     <section
-      className="w-full py-14 sm:py-20  overflow-hidden font-sans"
+      className="w-full overflow-hidden py-14 sm:py-20 font-sans"
       aria-label="Clinic photos"
     >
       <div className="container mx-auto px-6 lg:px-12 max-w-[1400px] mb-10 sm:mb-12">
@@ -37,29 +37,31 @@ export default function ClinicMarquee() {
         </p>
       </div>
 
-      <Marquee
-        speed={45}
-        gradient
-        gradientColor="#f4f9fd"
-        gradientWidth={72}
-        pauseOnHover
-        className="py-2"
-      >
-        {CLINIC_IMAGES.map((img) => (
-          <div
-            key={img.src}
-            className="relative h-[200px] w-[min(78vw,340px)] sm:h-[240px] sm:w-[380px] shrink-0 overflow-hidden rounded-[24px] mx-3 sm:mx-4 ring-1 ring-black/4"
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ))}
-      </Marquee>
+      <div className="w-full overflow-hidden">
+        <Marquee
+          speed={45}
+          gradient
+          gradientColor="#f4f9fd"
+          gradientWidth={72}
+          pauseOnHover
+          className="py-2"
+        >
+          {CLINIC_IMAGES.map((img) => (
+            <div
+              key={img.src}
+              className="relative h-[200px] w-[min(78vw,340px)] sm:h-[240px] sm:w-[380px] shrink-0 overflow-hidden rounded-[24px] mx-3 sm:mx-4 ring-1 ring-black/4"
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </Marquee>
+      </div>
     </section>
   );
 }

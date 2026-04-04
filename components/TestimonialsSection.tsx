@@ -24,19 +24,21 @@ export default function TestimonialsSection() {
         </h2>
       </div>
 
-      {/* react-fast-marquee */}
-      <Marquee
-        speed={50}
-        gradient={true}
-        gradientColor="white"
-        gradientWidth={80}
-        pauseOnHover={true}
-        className="py-4"
-      >
-        {testimonials.map((testimonial) => (
-          <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-        ))}
-      </Marquee>
+      {/* react-fast-marquee — wrapper clips horizontal track */}
+      <div className="w-full overflow-hidden">
+        <Marquee
+          speed={50}
+          gradient={true}
+          gradientColor="white"
+          gradientWidth={80}
+          pauseOnHover={true}
+          className="py-4"
+        >
+          {testimonials.map((testimonial) => (
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+          ))}
+        </Marquee>
+      </div>
 
     </section>
   );

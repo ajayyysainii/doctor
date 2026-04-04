@@ -50,7 +50,7 @@ export default function Footer() {
                     <React.Fragment key={i}>{line}{i === 0 && <br />}</React.Fragment>
                   ))}
                 </h4>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2">
                   <input 
                     type="email" 
                     placeholder="Your Email*"
