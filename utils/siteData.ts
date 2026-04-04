@@ -158,7 +158,13 @@ export const footerContent = {
   clinicDescription:
     "Expert orthopedic and joint replacement care — bridging advanced surgical techniques with compassionate patient support in Sikar, Rajasthan.",
   newsletterHeading: "Sign up to receive the latest\nnews and updates from us.",
-  navLinks: ["Home", "About", "Services", "Team", "Contact"],
+  navLinks: [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Team", href: "#team" },
+    { label: "Contact", href: "#contact" },
+  ],
   legalLinks: ["Privacy Policy", "Disclaimer", "Sitemap"],
   socialLinks: {
     twitter: "#",

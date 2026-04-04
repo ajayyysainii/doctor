@@ -68,7 +68,9 @@ export default function Footer() {
               <div className="flex flex-col gap-6">
                 <nav className="flex gap-6 sm:gap-8 flex-wrap">
                   {footerContent.navLinks.map((link) => (
-                    <a key={link} href="#" className="hover:text-[#008de4] transition-colors">{link}</a>
+                    <a key={link.href} href={link.href} className="hover:text-[#008de4] transition-colors">
+                      {link.label}
+                    </a>
                   ))}
                 </nav>
                 <div className="font-medium text-gray-500">

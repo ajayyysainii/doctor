@@ -6,7 +6,7 @@ import { appointmentContent } from '@/utils/siteData';
 
 export default function AppointmentSection() {
   return (
-    <section className="w-full py-24 bg-white font-sans">
+    <section id="contact" className="w-full py-24 bg-white font-sans scroll-mt-24">
       <div className="container mx-auto px-6 lg:px-12 max-w-[1200px]">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-stretch">
           

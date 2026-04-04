@@ -2,13 +2,16 @@
 
 import React, { useState } from 'react';
 import { Menu, X, Phone, ArrowUpRight, Star } from 'lucide-react';
-import { clinic, doctor, heroContent, footerContent } from '@/utils/siteData';
+import { clinic, heroContent, footerContent } from '@/utils/siteData';
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="relative min-h-[90vh] w-full flex flex-col overflow-hidden bg-[#031d2e] font-sans">
+    <div
+      id="home"
+      className="relative min-h-[90vh] w-full flex flex-col overflow-hidden bg-[#031d2e] font-sans scroll-mt-0"
+    >
 
       {/* ── Slide-out Drawer Overlay ─────────────────────────────── */}
       <div
@@ -48,13 +51,13 @@ export default function HeroSection() {
         <nav className="flex flex-col px-8 py-8 gap-1 flex-1">
           {footerContent.navLinks.map((link, i) => (
             <a
-              key={link}
-              href="#"
+              key={link.href}
+              href={link.href}
               onClick={() => setMenuOpen(false)}
               className="text-[17px] font-semibold text-white/80 hover:text-white hover:pl-2 transition-all duration-200 py-3.5 border-b border-white/5 flex items-center justify-between group"
               style={{ transitionDelay: menuOpen ? `${i * 40}ms` : '0ms' }}
             >
-              {link}
+              {link.label}
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
           ))}
@@ -69,12 +72,13 @@ export default function HeroSection() {
             <Phone className="w-4 h-4 fill-current" />
             {clinic.phone}
           </a>
-          <button
-            className="w-full bg-[#008de4] text-white py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-500 transition-colors shadow-lg"
+          <a
+            href="#contact"
             onClick={() => setMenuOpen(false)}
+            className="w-full bg-[#008de4] text-white py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-500 transition-colors shadow-lg text-center"
           >
             Book An Appointment
-          </button>
+          </a>
         </div>
       </div>
       {/* ── End Drawer ───────────────────────────────────────────── */}

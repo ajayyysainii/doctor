@@ -11,7 +11,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="w-full py-24 sm:py-32 bg-white font-sans">
+    <section id="services" className="w-full py-24 sm:py-32 bg-white font-sans scroll-mt-24">
       <div className="container mx-auto px-6 lg:px-12 max-w-[1400px]">
         
         {/* Top Section Header */}

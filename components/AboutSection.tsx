@@ -3,7 +3,10 @@ import { doctor, aboutContent } from '@/utils/siteData';
 
 export default function AboutSection() {
   return (
-    <section className="relative w-full py-24 sm:py-32 bg-white overflow-hidden font-sans">
+    <section
+      id="about"
+      className="relative w-full py-24 sm:py-32 bg-white overflow-hidden font-sans scroll-mt-24"
+    >
       {/* Background Decoration */}
       <div className="absolute -left-[20%] top-1/4 w-[50%] h-[150%] opacity-[0.03] pointer-events-none -rotate-12 flex justify-center items-center">
         <svg viewBox="0 0 100 100" className="w-full h-full fill-current text-gray-900" preserveAspectRatio="none">
@@ -77,8 +80,11 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Column Image */}
-          <div className="w-full h-[600px] lg:h-[800px] relative mt-8 lg:mt-0 px-2 lg:px-0">
+          {/* Right Column Image — Team anchor */}
+          <div
+            id="team"
+            className="w-full h-[600px] lg:h-[800px] relative mt-8 lg:mt-0 px-2 lg:px-0 scroll-mt-24"
+          >
             <div className="absolute inset-0 rounded-[48px] overflow-hidden shadow-2xl bg-gray-100">
               <img 
                 src="/doctor/profile.png" 
