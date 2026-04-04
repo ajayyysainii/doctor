@@ -60,9 +60,9 @@ export default function AboutSection() {
               <div className="flex items-center gap-5 relative z-10 w-full sm:w-auto">
                 <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden border-2 border-white/20 shrink-0 shadow-inner">
                   <img 
-                    src={doctor.image}
+                    src="/doctor/headshot.png"
                     alt={doctor.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-fill group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
                 <div>
@@ -81,7 +81,7 @@ export default function AboutSection() {
           <div className="w-full h-[600px] lg:h-[800px] relative mt-8 lg:mt-0 px-2 lg:px-0">
             <div className="absolute inset-0 rounded-[48px] overflow-hidden shadow-2xl bg-gray-100">
               <img 
-                src="/about-main.png" 
+                src="/doctor/profile.png" 
                 alt={`${doctor.name} — ${doctor.specialization}`}
                 className="w-full h-full object-cover"
               />
