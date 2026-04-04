@@ -13,7 +13,7 @@ const CLINIC_IMAGES = [
 export default function ClinicMarquee() {
   return (
     <section
-      className="w-full overflow-hidden py-14 sm:py-20 font-sans"
+      className="relative w-full max-w-full min-w-0 overflow-hidden py-14 sm:py-20 font-sans"
       aria-label="Clinic photos"
     >
       <div className="container mx-auto px-6 lg:px-12 max-w-[1400px] mb-10 sm:mb-12">
@@ -37,14 +37,14 @@ export default function ClinicMarquee() {
         </p>
       </div>
 
-      <div className="w-full overflow-hidden">
+      <div className="w-full max-w-full min-w-0 overflow-hidden">
         <Marquee
           speed={45}
           gradient
           gradientColor="#f4f9fd"
           gradientWidth={72}
           pauseOnHover
-          className="py-2"
+          className="max-w-full overflow-hidden py-2"
         >
           {CLINIC_IMAGES.map((img) => (
             <div

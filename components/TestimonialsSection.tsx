@@ -5,7 +5,7 @@ import { testimonials } from '@/utils/siteData';
 
 export default function TestimonialsSection() {
   return (
-    <section className="w-full py-24 sm:py-32 bg-white overflow-hidden font-sans">
+    <section className="relative w-full max-w-full min-w-0 overflow-hidden py-24 sm:py-32 bg-white font-sans">
 
       <div className="container mx-auto px-6 lg:px-12 mb-16 text-center max-w-3xl">
         {/* Small Header */}
@@ -25,14 +25,14 @@ export default function TestimonialsSection() {
       </div>
 
       {/* react-fast-marquee — wrapper clips horizontal track */}
-      <div className="w-full overflow-hidden">
+      <div className="w-full max-w-full min-w-0 overflow-hidden">
         <Marquee
           speed={50}
           gradient={true}
           gradientColor="white"
           gradientWidth={80}
           pauseOnHover={true}
-          className="py-4"
+          className="max-w-full overflow-hidden py-4"
         >
           {testimonials.map((testimonial) => (
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
