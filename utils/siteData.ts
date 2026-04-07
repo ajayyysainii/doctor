@@ -7,7 +7,7 @@ export const doctor = {
   name: "Dr. Suresh Palsania",
   shortName: "Dr. Suresh",
   specialization: "Orthopedic Surgeon",
-  qualification: "MS (Orthopedics) — SMS Medical College, Jaipur · 2022",
+  qualification: "MS (Orthopedics) — SMS Medical College, Jaipur ",
   experience: "1 Year in Healthcare",
   phone: "+91 98765 43210",
   image: "/doctor-headshot.png",   // swap path to update the photo
@@ -68,6 +68,31 @@ export const aboutContent = {
   ],
 };
 
+// ── Services Highlight Strip ─────────────────────────────────
+export const servicesHighlights = [
+  {
+    id: "regenerative-orthopedics",
+    title: "Regenerative Orthopedics",
+    image:
+      "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=1200",
+    href: "#services",
+  },
+  {
+    id: "med-fit",
+    title: "Med-Fit",
+    image:
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1200",
+    href: "#services",
+  },
+  {
+    id: "sports-medicine",
+    title: "Sports Medicine",
+    image:
+      "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=1200",
+    href: "#services",
+  },
+] as const;
+
 // ── Why Choose Us ────────────────────────────────────────────
 export const whyChooseUsContent = {
   sectionLabel: "Why Choose Us",
@@ -114,6 +139,166 @@ export const appointmentContent = {
   ctaLabel: "Book Appointment Now",
   phonePlaceholder: "+91 98765 43210",
 };
+
+// ── Pain Areas Section ────────────────────────────────────────
+export const painAreasContent = {
+  titleStart: "Where are you",
+  titleHighlight: "pain",
+  titleEnd: "?",
+  areas: [
+    {
+      id: "spine",
+      label: "Spine",
+      symptoms: [
+        "Low back pain",
+        "Neck pain",
+        "Sacroiliac joint pain or instability",
+        "Bulging/ herniated/ torn disc",
+        "Continued pain after lower back or neck surgery",
+        "Arthritis",
+        "Atrophied muscles",
+        "Instability",
+        "Pinched nerve/ sciatica",
+        "Spinal stenosis",
+        "Spondylolysis",
+      ],
+    },
+    {
+      id: "shoulder",
+      label: "Shoulder",
+      symptoms: [
+        "Rotator cuff injury",
+        "Shoulder impingement",
+        "Frozen shoulder",
+        "Shoulder instability",
+        "Labral tear",
+      ],
+    },
+    {
+      id: "elbow",
+      label: "Elbow",
+      symptoms: [
+        "Tennis elbow",
+        "Golfer's elbow",
+        "Elbow stiffness",
+        "Ligament strain",
+      ],
+    },
+    {
+      id: "hand-wrist",
+      label: "Hand/Wrist",
+      symptoms: [
+        "Carpal tunnel syndrome",
+        "Wrist sprain",
+        "Finger joint pain",
+        "Numbness or tingling",
+      ],
+    },
+    {
+      id: "hip",
+      label: "Hip",
+      symptoms: [
+        "Hip arthritis",
+        "Hip labral tear",
+        "Groin pain while walking",
+        "Hip impingement",
+      ],
+    },
+    {
+      id: "knee",
+      label: "Knee",
+      symptoms: [
+        "Knee osteoarthritis",
+        "ACL/PCL injury",
+        "Meniscus tear",
+        "Pain while climbing stairs",
+      ],
+    },
+    {
+      id: "foot-ankle",
+      label: "Foot/Ankle",
+      symptoms: [
+        "Ankle sprain instability",
+        "Plantar fasciitis",
+        "Achilles tendon pain",
+        "Heel pain",
+      ],
+    },
+  ],
+  centerImage:
+    "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1200",
+} as const;
+
+// ── Treatments Section ────────────────────────────────────────
+export const treatmentsContent = {
+  title: "Treatments",
+  items: [
+    {
+      id: "orthopedic",
+      title: "Orthopedic Treatments",
+      description:
+        "Heal your body using advanced regenerative therapies with minimally invasive methods that support faster recovery and reduce dependence on traditional surgery.",
+      label: "Lumbar/Cervical Spine",
+      image:
+        "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&q=80&w=1200",
+      stripImages: [
+        "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1580281657521-47f249e8f4df?auto=format&fit=crop&q=80&w=300",
+      ],
+      points: ["Knee", "Lumbar/Cervical Spine", "Hip", "Shoulder", "Hand/Wrist", "Foot/Ankle"],
+    },
+    {
+      id: "sports-medicine",
+      title: "Sports Medicine Treatments",
+      description:
+        "Whether you are a professional athlete or active individual, our non-surgical, customized protocols target injury recovery while helping restore strength and performance.",
+      label: "Elbow Tendinitis/Arthritis",
+      image:
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200",
+      stripImages: [
+        "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1517963628607-235ccdd5476b?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&q=80&w=300",
+      ],
+      points: [
+        "Hip/Thy",
+        "Elbow Tendinitis/Arthritis",
+        "Shoulder RC Tear/Labral Tear",
+        "Lumbar/Cervical Disc Bulge/Sciatica",
+        "Foot/Ankle Ligament Injuries",
+        "ACL/Meniscus/Ligament Injuries",
+      ],
+    },
+    {
+      id: "med-fit",
+      title: "Med-Fit",
+      description:
+        "Our Med-Fit approach emphasizes prevention and healthy lifestyle through guided movement, nutrition support, stress management, and advanced therapeutic techniques.",
+      label: "Brain Tap Therapy",
+      image:
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1200",
+      stripImages: [
+        "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=300",
+      ],
+      points: [
+        "HBOT",
+        "PEMF Therapy",
+        "Custom fitness/Corrective exercises",
+        "Brain Tap Therapy",
+        "IV nutrition",
+        "EMS training",
+        "Diet and Nutrition",
+        "VO2 max analysis",
+      ],
+    },
+  ],
+} as const;
 
 // ── Testimonials ─────────────────────────────────────────────
 export const testimonials = [

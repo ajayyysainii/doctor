@@ -71,6 +71,9 @@ export default function AboutSection() {
                 <div>
                   <h5 className="text-white font-bold text-[20px] mb-0.5">{doctor.shortName}</h5>
                   <p className="text-blue-100 text-[15px] font-medium tracking-wide">{doctor.specialization}</p>
+                  <p className="text-blue-100/90 text-[12px] sm:text-[13px] leading-snug mt-1 max-w-[280px]">
+                    {doctor.qualification}
+                  </p>
                 </div>
               </div>
               
