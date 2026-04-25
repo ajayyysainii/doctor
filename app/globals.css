@@ -24,3 +24,90 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.blog-html {
+  color: #111111;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.blog-html h1,
+.blog-html h2,
+.blog-html h3,
+.blog-html h4,
+.blog-html h5,
+.blog-html h6 {
+  color: #111111;
+  line-height: 1.25;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 800;
+}
+
+.blog-html h1 {
+  color: #008de4;
+}
+
+.blog-html h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.blog-html h2 {
+  font-size: clamp(1.45rem, 2.7vw, 2rem);
+}
+
+.blog-html h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.blog-html p {
+  margin: 0.85rem 0;
+}
+
+.blog-html ul,
+.blog-html ol {
+  margin: 1rem 0 1rem 1.35rem;
+  padding-left: 0.6rem;
+}
+
+.blog-html ul {
+  list-style: disc;
+}
+
+.blog-html ol {
+  list-style: decimal;
+}
+
+.blog-html li {
+  margin: 0.45rem 0;
+  padding-left: 0.1rem;
+}
+
+.blog-html a {
+  color: #008de4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-html a:hover {
+  color: #0b76be;
+}
+
+.blog-html strong {
+  color: #111111;
+}
+
+.blog-html img {
+  border-radius: 0.85rem;
+  margin: 1rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-html blockquote {
+  margin: 1.2rem 0;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid #008de4;
+  background: rgb(255 255 255 / 0.04);
+  border-radius: 0.6rem;
+}
