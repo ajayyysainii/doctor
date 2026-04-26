@@ -347,6 +347,7 @@ export const footerContent = {
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
+    { label: "Blog", href: "/blog" },
     { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
   ],
