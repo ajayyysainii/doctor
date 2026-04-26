@@ -347,7 +347,7 @@ export const footerContent = {
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
-    { label: "Blog", href: "/blog" },
+    { label: "Patient Education", href: "/patient-education" },
     { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
   ],

@@ -53,7 +53,7 @@ export default async function BlogListPage() {
           />
           <div className="container relative mx-auto max-w-[1400px] px-6 lg:px-12">
             <p className="text-sm font-bold tracking-[0.18em] text-blue-200 uppercase">Knowledge Center</p>
-            <h1 className="mt-3 text-4xl font-black tracking-tight text-white sm:text-6xl">Our Blogs</h1>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-white sm:text-6xl">Patient Education</h1>
             <p className="mt-4 max-w-2xl text-base text-blue-100/80 sm:text-lg">
               Trusted orthopedic insights, recovery guidance, and patient education.
             </p>
@@ -74,9 +74,6 @@ export default async function BlogListPage() {
                     href={`/blog/${blog.slug}`}
                     className="group block rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#008de4]/40 hover:shadow-[0_18px_42px_rgba(0,141,228,0.14)]"
                   >
-                    <p className="text-[11px] font-semibold tracking-[0.16em] text-[#008de4] uppercase">
-                      Blog Article
-                    </p>
                     <h2 className="mt-2 text-2xl font-black tracking-tight text-gray-900 transition-colors group-hover:text-[#008de4]">
                       {blog.title}
                     </h2>
