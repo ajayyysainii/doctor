@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     "orthopedic health guide",
     "bone health Sikar",
   ],
-  alternates: { canonical: "https://www.drsureshpalsania.in/blog" },
+  alternates: { canonical: "https://www.drsureshpalsania.in/patient-education" },
   openGraph: {
     type: "website",
-    url: "https://www.drsureshpalsania.in/blog",
+    url: "https://www.drsureshpalsania.in/patient-education",
     title: "Orthopedic Health Blog — Dr. Suresh Palsania",
     description:
       "Expert orthopedic articles on joint replacement, knee & hip care, spine health and sports medicine.",
@@ -71,7 +71,7 @@ export default async function BlogListPage() {
                 {blogs.map((blog) => (
                   <Link
                     key={blog.id}
-                    href={`/blog/${blog.slug}`}
+                    href={`/patient-education/${blog.slug}`}
                     className="group block rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#008de4]/40 hover:shadow-[0_18px_42px_rgba(0,141,228,0.14)]"
                   >
                     <h2 className="mt-2 text-2xl font-black tracking-tight text-gray-900 transition-colors group-hover:text-[#008de4]">

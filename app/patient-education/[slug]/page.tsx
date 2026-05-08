@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
   const blog = await getBlogBySlug(slug);
   if (!blog) return {};
 
-  const url = `${SITE_URL}/blog/${blog.slug}`;
+  const url = `${SITE_URL}/patient-education/${blog.slug}`;
   const description = blog.excerpt || blog.title;
   const ogImage = blog.image || "/og-image.png";
 
@@ -57,7 +57,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  const canonicalUrl = `${SITE_URL}/blog/${blog.slug}`;
+  const canonicalUrl = `${SITE_URL}/patient-education/${blog.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -99,7 +99,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           />
           <div className="container relative mx-auto max-w-[1400px] px-6 lg:px-12">
             <Link
-              href="/blog"
+              href="/patient-education"
               className="inline-flex rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-[0.08em] text-blue-100 uppercase transition-colors hover:border-[#008de4]/70 hover:text-white"
             >
               ← Back to all blogs
