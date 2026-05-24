@@ -17,7 +17,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 4. First deploy: start the app once so MongoDB can create indexes (`uniq_slot_active`, etc.), or create them manually in Atlas.
 
-## Getting Started
+### Getting Started
 
 First, run the development server:
 
