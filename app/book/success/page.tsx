@@ -24,8 +24,7 @@ export default async function BookSuccessPage({
     minute: "2-digit",
   });
 
-  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "";
-  const joinUrl = `${site.replace(/\/$/, "")}${summary.joinPath}`;
+  const joinUrl = summary.joinUrl;
 
   return (
     <main className="min-h-screen bg-[#f0f6fa] py-16 px-4">
@@ -42,7 +41,7 @@ export default async function BookSuccessPage({
         </p>
         <div className="mt-8 flex flex-col gap-3">
           <a
-            href={summary.joinPath}
+            href={joinUrl}
             className="rounded-xl bg-[#008de4] py-4 text-center font-bold text-white shadow hover:bg-blue-600"
           >
             Open video room

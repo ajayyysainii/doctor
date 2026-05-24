@@ -1,5 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import { doctor, aboutContent } from '@/utils/siteData';
+import { BOOK_PATH } from '@/utils/siteUrl';
 
 export default function AboutSection() {
   return (
@@ -77,9 +79,12 @@ export default function AboutSection() {
                 </div>
               </div>
               
-              <button className="bg-white text-[#008de4] w-full sm:w-auto px-8 py-3.5 rounded-[14px] font-bold text-[15px] hover:bg-gray-50 hover:shadow-md transition-all duration-300 relative z-10">
+              <Link
+                href={BOOK_PATH}
+                className="bg-white text-[#008de4] w-full sm:w-auto px-8 py-3.5 rounded-[14px] font-bold text-[15px] hover:bg-gray-50 hover:shadow-md transition-all duration-300 relative z-10 inline-flex items-center justify-center"
+              >
                 Book An Appointment
-              </button>
+              </Link>
             </div>
           </div>
 

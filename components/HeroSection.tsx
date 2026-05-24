@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Menu, X, Phone, ArrowUpRight, Star } from 'lucide-react';
 import { clinic, heroContent, footerContent } from '@/utils/siteData';
+import { BOOK_PATH } from '@/utils/siteUrl';
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -72,13 +74,13 @@ export default function HeroSection() {
             <Phone className="w-4 h-4 fill-current" />
             {clinic.phone}
           </a>
-          <a
-            href="#contact"
+          <Link
+            href={BOOK_PATH}
             onClick={() => setMenuOpen(false)}
             className="w-full bg-[#008de4] text-white py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-500 transition-colors shadow-lg text-center"
           >
             Book An Appointment
-          </a>
+          </Link>
         </div>
       </div>
       {/* ── End Drawer ───────────────────────────────────────────── */}
@@ -113,9 +115,12 @@ export default function HeroSection() {
             <Phone className="w-5 h-5 fill-white" />
             Call Us
           </a>
-          <button className="bg-[#008de4] text-white px-6 py-2.5 rounded-sm font-bold text-sm shadow-lg hover:bg-blue-500 transition-colors">
-            LET'S TALK
-          </button>
+          <Link
+            href={BOOK_PATH}
+            className="bg-[#008de4] text-white px-6 py-2.5 rounded-sm font-bold text-sm shadow-lg hover:bg-blue-500 transition-colors"
+          >
+            LET&apos;S TALK
+          </Link>
         </div>
       </nav>
 
@@ -157,12 +162,18 @@ export default function HeroSection() {
             </h1>
             
             <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center w-full sm:w-auto">
-              <button className="bg-[#008de4] text-white px-8 py-4 rounded font-bold hover:bg-blue-500 hover:-translate-y-1 transition-all shadow-[0_10px_20px_rgba(0,141,228,0.3)] w-full sm:w-auto text-center">
+              <Link
+                href={BOOK_PATH}
+                className="bg-[#008de4] text-white px-8 py-4 rounded font-bold hover:bg-blue-500 hover:-translate-y-1 transition-all shadow-[0_10px_20px_rgba(0,141,228,0.3)] w-full sm:w-auto text-center"
+              >
                 {heroContent.ctaPrimary}
-              </button>
-              <button className="bg-white/5 border border-white/20 backdrop-blur-md text-white px-8 py-4 rounded font-bold flex items-center justify-center gap-2 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all w-full sm:w-auto">
+              </Link>
+              <a
+                href="#services"
+                className="bg-white/5 border border-white/20 backdrop-blur-md text-white px-8 py-4 rounded font-bold flex items-center justify-center gap-2 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all w-full sm:w-auto"
+              >
                 {heroContent.ctaSecondary} <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
-              </button>
+              </a>
             </div>
           </div>
 

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { appointmentContent } from "@/utils/siteData";
+import { BOOK_PATH } from "@/utils/siteUrl";
 
 export default function AppointmentSection() {
   return (
@@ -20,7 +21,7 @@ export default function AppointmentSection() {
             </p>
 
             <Link
-              href="/book"
+              href={BOOK_PATH}
               className="inline-flex w-full items-center justify-center rounded-xl bg-[#008de4] py-4 font-bold text-[15px] text-white shadow-[0_10px_20px_rgba(0,141,228,0.25)] transition hover:bg-blue-600 hover:-translate-y-[2px]"
             >
               {appointmentContent.ctaLabel}

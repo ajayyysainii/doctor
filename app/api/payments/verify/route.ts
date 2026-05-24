@@ -7,6 +7,7 @@ import {
 } from "@/lib/bookings";
 import { notifyAdminBookingWhatsapp, sendBookingWhatsapp } from "@/lib/twilio";
 import { sendAdminBookingEmail, sendBookingEmail } from "@/lib/email";
+import { consultationJoinUrl } from "@/utils/siteUrl";
 
 function timingSafeEq(a: string, b: string): boolean {
   const ba = Buffer.from(a, "utf8");
@@ -52,8 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (booking.status === "paid") {
-      const site = process.env.NEXT_PUBLIC_SITE_URL ?? "";
-      const joinUrl = `${site.replace(/\/$/, "")}/consultation/${booking.bookingId}`;
+      const joinUrl = consultationJoinUrl(booking.bookingId);
       return Response.json({
         ok: true,
         bookingId: booking.bookingId,
@@ -84,8 +84,7 @@ export async function POST(request: NextRequest) {
       },
     );
 
-    const site = process.env.NEXT_PUBLIC_SITE_URL ?? "";
-    const joinUrl = `${site.replace(/\/$/, "")}/consultation/${booking.bookingId}`;
+    const joinUrl = consultationJoinUrl(booking.bookingId);
 
     // --- WhatsApp notifications (independent — failure won't block email) ---
     try {

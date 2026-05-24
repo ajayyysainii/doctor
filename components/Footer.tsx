@@ -1,5 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import { clinic, footerContent } from '@/utils/siteData';
+import { BOOK_PATH } from '@/utils/siteUrl';
 
 export default function Footer() {
   return (
@@ -11,9 +13,12 @@ export default function Footer() {
           <h2 className="text-2xl sm:text-[28px] font-black tracking-tight text-gray-900 uppercase">
             {footerContent.ctaBanner}
           </h2>
-          <button className="bg-[#008de4] text-white px-8 py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-600 transition-colors whitespace-nowrap shadow-md">
+          <Link
+            href={BOOK_PATH}
+            className="bg-[#008de4] text-white px-8 py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-600 transition-colors whitespace-nowrap shadow-md"
+          >
             {footerContent.ctaButton}
-          </button>
+          </Link>
         </div>
 
         {/* Middle Section */}

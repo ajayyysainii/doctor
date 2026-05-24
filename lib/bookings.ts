@@ -2,6 +2,7 @@ import type { Collection, WithId } from "mongodb";
 import crypto from "crypto";
 import clientPromise from "@/utils/mongodb";
 import { bookingConfig } from "@/utils/siteData";
+import { consultationJoinUrl } from "@/utils/siteUrl";
 
 export type BookingStatus = "pending" | "paid" | "cancelled" | "completed";
 
@@ -91,6 +92,7 @@ export type PaidBookingSummary = {
   slotStart: string;
   slotEnd: string;
   joinPath: string;
+  joinUrl: string;
 };
 
 export async function getPaidBookingSummary(bookingId: string): Promise<PaidBookingSummary | null> {
@@ -102,6 +104,7 @@ export async function getPaidBookingSummary(bookingId: string): Promise<PaidBook
     slotStart: b.slotStart.toISOString(),
     slotEnd: b.slotEnd.toISOString(),
     joinPath: `/consultation/${b.bookingId}`,
+    joinUrl: consultationJoinUrl(b.bookingId),
   };
 }
 
