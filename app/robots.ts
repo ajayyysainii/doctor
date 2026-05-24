@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/"],
       },
     ],
-    sitemap: "https://www.drsureshpalsania.in/sitemap.xml",
-    host: "https://www.drsureshpalsania.in",
+    sitemap: "https://www.orthodrskpalsania.com/sitemap.xml",
+    host: "https://www.orthodrskpalsania.com",
   };
 }

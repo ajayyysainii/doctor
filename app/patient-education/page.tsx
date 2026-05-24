@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "Dr. Suresh Palsania blog",
     "orthopedic health guide",
     "bone health Sikar",
-  ],
-  alternates: { canonical: "https://www.drsureshpalsania.in/patient-education" },
+  ],  
+  alternates: { canonical: "https://www.orthodrskpalsania.com/patient-education" },
   openGraph: {
     type: "website",
-    url: "https://www.drsureshpalsania.in/patient-education",
+    url: "https://www.orthodrskpalsania.com/patient-education",
     title: "Orthopedic Health Blog — Dr. Suresh Palsania",
     description:
       "Expert orthopedic articles on joint replacement, knee & hip care, spine health and sports medicine.",

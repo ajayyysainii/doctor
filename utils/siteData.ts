@@ -20,7 +20,7 @@ export const clinic = {
   tagline: "Joint Replacement & Trauma Surgeon",
   address:
     "1st Floor, Hanuman Heights, Near Ram Mandir, Behind SK Hospital, Sakpura Mohlla, Sikar‑332001, Rajasthan",
-  email: "contact@drsureshpalsania.in",
+  email: "contact@orthodrskpalsania.com",
   phone: doctor.phone,
   copyright: `Copyright © ${new Date().getFullYear()} Dr. Suresh Palsania`,
   // Opening hours (used for display only — adjust as needed)

@@ -4,6 +4,7 @@ import AboutSection from "@/components/AboutSection";
 import ServicesHighlightStrip from "@/components/ServicesHighlightStrip";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import AppointmentSection from "@/components/AppointmentSection";
+import FeaturedSection from "@/components/FeaturedSection";
 import PainAreasSection from "@/components/PainAreasSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import TreatmentsSection from "@/components/TreatmentsSection";
@@ -18,6 +19,7 @@ export default function Home() {
       <ServicesHighlightStrip />
       <WhyChooseUs />
       <AppointmentSection />
+      <FeaturedSection />
       <PainAreasSection />
       <TestimonialsSection />
       <TreatmentsSection />

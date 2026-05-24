@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import { getAllBlogs, getBlogBySlug } from "@/utils/blogs";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.drsureshpalsania.in";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.orthodrskpalsania.com";
 
 type BlogDetailPageProps = {
   params: Promise<{ slug: string }>;
