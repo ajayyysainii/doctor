@@ -35,6 +35,15 @@ export const clinic = {
   ],
 };
 
+/** Video consultation booking — slots & join window (used by API + UI) */
+export const bookingConfig = {
+  slotMinutes: 30,
+  joinWindowBeforeMin: 60,   // patient can join up to 60 min early
+  joinWindowAfterMin: 120,   // patient can join up to 120 min after slot start
+  pendingReservationMinutes: 10,
+  timezone: "Asia/Kolkata",
+} as const;
+
 // ── Hero Section ─────────────────────────────────────────────
 export const heroContent = {
   headline: "Together for\nBetter Health",

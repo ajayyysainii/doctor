@@ -1,5 +1,22 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Video consultation (Razorpay + Agora + Twilio)
+
+1. Copy [.env.example](.env.example) to `.env` and set:
+   - `DB_URI` — MongoDB connection string
+   - `NEXT_PUBLIC_SITE_URL` — public site URL (used in WhatsApp join links)
+   - Razorpay: `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `NEXT_PUBLIC_RAZORPAY_KEY_ID`
+   - Agora: `AGORA_APP_ID`, `AGORA_APP_CERTIFICATE`, `NEXT_PUBLIC_AGORA_APP_ID` (often same as `AGORA_APP_ID`)
+   - Twilio WhatsApp: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_WHATSAPP_FROM`, `TWILIO_ADMIN_WHATSAPP_TO`
+   - `CONSULTATION_FEE_INR` — fixed fee in rupees
+   - `ADMIN_PASSWORD` — shared password for `/admin` dashboard
+
+2. User flow: **`/book`** → pay → **`/book/success`** → **`/consultation/[bookingId]`** during the join window.
+
+3. Doctor flow: **`/admin`** → **`/admin/dashboard`** → **Join** → same consultation URL with `?role=admin`.
+
+4. First deploy: start the app once so MongoDB can create indexes (`uniq_slot_active`, etc.), or create them manually in Atlas.
+
 ## Getting Started
 
 First, run the development server:
