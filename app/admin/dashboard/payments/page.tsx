@@ -1,7 +1,10 @@
-import { getBookingsCollection } from "@/lib/bookings";
+import type { Filter } from "mongodb";
+import { getBookingsCollection, type BookingDoc } from "@/lib/bookings";
 import { bookingConfig } from "@/utils/siteData";
+import Link from "next/link";
 
 const TZ = bookingConfig.timezone;
+const PAGE_SIZE = 10;
 
 function formatIst(d: Date | undefined | null) {
   if (!d) return "—";
@@ -33,18 +36,28 @@ function statusBadge(status: string) {
   return `${base} bg-gray-100 text-gray-700`;
 }
 
-export default async function PaymentsPage() {
+export default async function PaymentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page } = await searchParams;
+  const currentPage = Math.max(1, Number.parseInt(page ?? "1", 10) || 1);
   const col = await getBookingsCollection();
+  const paymentQuery: Filter<BookingDoc> = {
+    $or: [{ status: "paid" }, { "razorpay.orderId": { $exists: true } }],
+  };
+
+  const totalRecords = await col.countDocuments(paymentQuery);
+  const totalPages = Math.max(1, Math.ceil(totalRecords / PAGE_SIZE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const safeSkip = (safeCurrentPage - 1) * PAGE_SIZE;
 
   const rows = await col
-    .find({
-      $or: [
-        { status: "paid" },
-        { "razorpay.orderId": { $exists: true } },
-      ],
-    })
+    .find(paymentQuery)
     .sort({ paidAt: -1, createdAt: -1 })
-    .limit(200)
+    .skip(safeSkip)
+    .limit(PAGE_SIZE)
     .project({
       bookingId: 1,
       patientName: 1,
@@ -73,12 +86,14 @@ export default async function PaymentsPage() {
         </div>
         <div className="flex gap-3">
           <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Paid total</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+              Paid total (this page)
+            </p>
             <p className="text-xl font-bold text-gray-900">{inr(totalPaidPaise)}</p>
           </div>
           <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Records</p>
-            <p className="text-xl font-bold text-gray-900">{rows.length}</p>
+            <p className="text-xl font-bold text-gray-900">{totalRecords}</p>
           </div>
         </div>
       </div>
@@ -130,6 +145,39 @@ export default async function PaymentsPage() {
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <p className="text-sm text-gray-600">
+          Page {safeCurrentPage} of {totalPages}
+        </p>
+        <div className="flex gap-2">
+          {safeCurrentPage > 1 ? (
+            <Link
+              href={`/admin/dashboard/payments?page=${safeCurrentPage - 1}`}
+              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              Previous
+            </Link>
+          ) : (
+            <span className="rounded-lg border border-gray-100 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-400">
+              Previous
+            </span>
+          )}
+
+          {safeCurrentPage < totalPages ? (
+            <Link
+              href={`/admin/dashboard/payments?page=${safeCurrentPage + 1}`}
+              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              Next
+            </Link>
+          ) : (
+            <span className="rounded-lg border border-gray-100 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-400">
+              Next
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

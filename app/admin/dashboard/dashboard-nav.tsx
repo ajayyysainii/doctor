@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarClock, IndianRupee } from "lucide-react";
+import { CalendarClock, FileText, IndianRupee } from "lucide-react";
 
 const items = [
   {
@@ -14,6 +14,11 @@ const items = [
     href: "/admin/dashboard/payments",
     label: "Payments",
     icon: IndianRupee,
+  },
+  {
+    href: "/admin/dashboard/blogs",
+    label: "Blogs",
+    icon: FileText,
   },
 ] as const;
 

@@ -111,3 +111,36 @@ body {
   background: rgb(255 255 255 / 0.04);
   border-radius: 0.6rem;
 }
+
+.blog-html mark {
+  background-color: #fef08a;
+  border-radius: 0.15rem;
+  padding: 0 0.1rem;
+}
+
+/* Tiptap editor (admin) */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror pre {
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+  font-family: ui-monospace, monospace;
+  margin: 0.85rem 0;
+  padding: 0.75rem 1rem;
+}
+
+.ProseMirror mark {
+  background-color: #fef08a;
+  border-radius: 0.15rem;
+  padding: 0 0.1rem;
+}

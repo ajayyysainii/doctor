@@ -10,8 +10,7 @@ type BlogDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const revalidate = false;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const blogs = await getAllBlogs();

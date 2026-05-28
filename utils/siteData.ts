@@ -95,7 +95,7 @@ export const servicesHighlights = [
   },
   {
     id: "sports-medicine",
-    title: "Sports Medicine",
+    title: "Sports Injuries",
     image:
       "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=1200",
     href: "#services",

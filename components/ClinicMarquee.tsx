@@ -3,7 +3,6 @@ import Marquee from "react-fast-marquee";
 import { clinic } from "@/utils/siteData";
 
 const CLINIC_IMAGES = [
-  { src: "/clinic/clinic.png", alt: `${clinic.name} — clinic interior` },
   { src: "/clinic/clinic2.png", alt: `${clinic.name} — facility` },
   { src: "/clinic/clinic3.png", alt: `${clinic.name} — care environment` },
   { src: "/clinic/clinic4.png", alt: `${clinic.name} — medical facility` },
