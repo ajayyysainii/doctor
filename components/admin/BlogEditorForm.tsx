@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ExternalLink, Loader2, Save } from "lucide-react";
+import { useRef, useState } from "react";
+import { ExternalLink, Loader2, Save, Upload, X } from "lucide-react";
 import type { Blog } from "@/lib/blogs";
 import { RichTextEditor } from "./RichTextEditor";
+import { uploadToS3 } from "@/utils/uploadToS3";
 
 type BlogEditorFormProps = {
   mode: "create" | "edit";
@@ -14,12 +15,14 @@ type BlogEditorFormProps = {
 
 export function BlogEditorForm({ mode, initial }: BlogEditorFormProps) {
   const router = useRouter();
+  const featuredInputRef = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState(initial?.title ?? "");
   const [excerpt, setExcerpt] = useState(initial?.excerpt ?? "");
   const [image, setImage] = useState(initial?.image ?? "");
   const [contentHtml, setContentHtml] = useState(initial?.contentHtml ?? "");
   const [published, setPublished] = useState(initial?.published ?? false);
   const [saving, setSaving] = useState(false);
+  const [uploadingFeatured, setUploadingFeatured] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -54,6 +57,22 @@ export function BlogEditorForm({ mode, initial }: BlogEditorFormProps) {
   }
 
   const previewSlug = initial?.slug;
+
+  async function handleFeaturedImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setError(null);
+    setUploadingFeatured(true);
+    try {
+      const url = await uploadToS3(file, "blog-featured");
+      setImage(url);
+    } catch (err) {
+      setError(`Featured image upload failed: ${err instanceof Error ? err.message : "unknown"}`);
+    } finally {
+      setUploadingFeatured(false);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-4xl space-y-6">
@@ -161,20 +180,62 @@ export function BlogEditorForm({ mode, initial }: BlogEditorFormProps) {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-            <label htmlFor="image" className="mb-1.5 block text-sm font-bold text-gray-900">
-              Featured image URL
-            </label>
+            <h2 className="mb-3 text-sm font-bold text-gray-900">Featured image</h2>
+
+            {/* Hidden file input */}
             <input
-              id="image"
-              type="url"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="https://..."
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              ref={featuredInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+              className="hidden"
+              onChange={handleFeaturedImageChange}
             />
-            {image && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={image} alt="Preview" className="mt-3 w-full rounded-lg border border-gray-100" />
+
+            {image ? (
+              <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image}
+                  alt="Featured preview"
+                  className="w-full rounded-lg border border-gray-100 object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setImage("")}
+                  className="absolute right-2 top-2 rounded-full bg-white/90 p-1 shadow hover:bg-red-50"
+                  title="Remove image"
+                >
+                  <X className="h-4 w-4 text-red-500" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => featuredInputRef.current?.click()}
+                  disabled={uploadingFeatured}
+                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+                >
+                  {uploadingFeatured ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <Upload className="h-3.5 w-3.5" />
+                  )}
+                  Replace image
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => featuredInputRef.current?.click()}
+                disabled={uploadingFeatured}
+                className="flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-200 py-8 text-sm text-gray-500 transition-colors hover:border-blue-400 hover:bg-blue-50/50 hover:text-blue-600 disabled:opacity-50"
+              >
+                {uploadingFeatured ? (
+                  <Loader2 className="h-6 w-6 animate-spin" />
+                ) : (
+                  <Upload className="h-6 w-6" />
+                )}
+                {uploadingFeatured ? "Uploading…" : "Click to upload featured image"}
+                <span className="text-xs text-gray-400">JPG, PNG, WebP, GIF, AVIF</span>
+              </button>
             )}
           </div>
         </aside>

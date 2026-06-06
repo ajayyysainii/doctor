@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { FileText, Plus } from "lucide-react";
-import { getAllBlogsAdmin } from "@/lib/blogs";
+import { getBlogsAdminPage } from "@/lib/blogs";
 import { BlogDeleteButton } from "@/components/admin/BlogDeleteButton";
+import { PaginationControls } from "@/components/admin/PaginationControls";
+import { Suspense } from "react";
+
+const PER_PAGE = 10;
 
 function statusBadge(published: boolean) {
   const base = "inline-flex rounded-full px-2 py-0.5 text-xs font-semibold";
@@ -21,8 +25,20 @@ function formatDate(iso: string | null) {
   });
 }
 
-export default async function BlogsAdminPage() {
-  const blogs = await getAllBlogsAdmin();
+type PageProps = {
+  searchParams: Promise<{ page?: string }>;
+};
+
+export default async function BlogsAdminPage({ searchParams }: PageProps) {
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
+
+  const { blogs, total } = await getBlogsAdminPage(page, PER_PAGE);
+  const totalPages = Math.ceil(total / PER_PAGE);
+
+  // Clamp to last valid page if ?page= is out of range
+  const clampedPage = Math.min(page, Math.max(1, totalPages));
+
   const publishedCount = blogs.filter((b) => b.published).length;
 
   return (
@@ -36,10 +52,12 @@ export default async function BlogsAdminPage() {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Total</p>
+            <p className="text-xl font-bold text-gray-900">{total}</p>
+          </div>
+          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Published</p>
-            <p className="text-xl font-bold text-gray-900">
-              {publishedCount} / {blogs.length}
-            </p>
+            <p className="text-xl font-bold text-gray-900">{publishedCount}</p>
           </div>
           <Link
             href="/admin/dashboard/blogs/new"
@@ -66,7 +84,9 @@ export default async function BlogsAdminPage() {
               <tr>
                 <td colSpan={4} className="px-4 py-12 text-center text-gray-500">
                   <FileText className="mx-auto mb-2 h-8 w-8 text-gray-300" />
-                  No blog posts yet. Create your first article.
+                  {total === 0
+                    ? "No blog posts yet. Create your first article."
+                    : "No posts on this page."}
                 </td>
               </tr>
             ) : (
@@ -111,6 +131,11 @@ export default async function BlogsAdminPage() {
           </tbody>
         </table>
       </div>
+
+      {/* PaginationControls uses useSearchParams — wrap in Suspense per Next.js requirement */}
+      <Suspense>
+        <PaginationControls page={clampedPage} totalPages={totalPages} />
+      </Suspense>
     </div>
   );
 }

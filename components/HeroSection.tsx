@@ -87,25 +87,27 @@ export default function HeroSection() {
 
       {/* Top Navigation */}
       <nav className="absolute top-0 w-full px-6 py-6 flex justify-between items-center z-50">
+
+        {/* Mobile: Hamburger button */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="bg-white px-5 py-2.5 rounded-md font-bold text-sm flex items-center gap-2 shadow-lg hover:bg-gray-50 transition-colors text-[#008de4]"
+          className="md:hidden bg-white px-5 py-2.5 rounded-md font-bold text-sm flex items-center gap-2 shadow-lg hover:bg-gray-50 transition-colors text-[#008de4]"
         >
           MENU <Menu className="w-5 h-5" />
         </button>
-        
-        {/* Logo */}
-        <div className="flex flex-col items-center cursor-pointer group max-w-[200px] sm:max-w-[320px] text-center">
-          <div className="flex items-center gap-2">
-            <span className="text-white text-[1rem] sm:text-xl md:text-2xl font-extrabold leading-tight tracking-tight">
-              {clinic.name}
-            </span>
-          </div>
-          <span className="hidden sm:block text-blue-300/80 text-xs font-semibold tracking-widest uppercase mt-0.5">
-            {clinic.tagline}
-          </span>
-        </div>
 
+        {/* Desktop: Horizontal nav links */}
+        <div className="hidden md:flex items-center gap-1">
+          {footerContent.navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-white/80 hover:text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
         {/* Right Nav */}
         <div className="hidden sm:flex items-center gap-6">
           <a

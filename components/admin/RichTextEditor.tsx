@@ -26,12 +26,15 @@ import {
   Link2,
   List,
   ListOrdered,
+  Loader2,
   Quote,
   Redo,
   Strikethrough,
   Underline as UnderlineIcon,
   Undo,
 } from "lucide-react";
+import { uploadToS3 } from "@/utils/uploadToS3";
+import { useRef, useState } from "react";
 
 type RichTextEditorProps = {
   value: string;
@@ -74,6 +77,8 @@ function ToolbarDivider() {
 }
 
 export function RichTextEditor({ value, onChange, placeholder = "Write your article..." }: RichTextEditorProps) {
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -125,11 +130,28 @@ export function RichTextEditor({ value, onChange, placeholder = "Write your arti
   }, [editor]);
 
   const addImage = useCallback(() => {
-    if (!editor) return;
-    const url = window.prompt("Image URL");
-    if (!url?.trim()) return;
-    editor.chain().focus().setImage({ src: url.trim() }).run();
-  }, [editor]);
+    // Trigger file picker — upload handled by handleImageFile
+    imageInputRef.current?.click();
+  }, []);
+
+  const handleImageFile = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      e.target.value = ""; // reset so same file can be re-selected
+      if (!file || !editor) return;
+
+      setUploadingImage(true);
+      try {
+        const url = await uploadToS3(file, "blog-images");
+        editor.chain().focus().setImage({ src: url }).run();
+      } catch (err) {
+        alert(`Image upload failed: ${err instanceof Error ? err.message : "unknown error"}`);
+      } finally {
+        setUploadingImage(false);
+      }
+    },
+    [editor]
+  );
 
   if (!editor) {
     return (
@@ -262,9 +284,17 @@ export function RichTextEditor({ value, onChange, placeholder = "Write your arti
         <ToolbarButton title="Insert link" onClick={setLink} active={editor.isActive("link")}>
           <Link2 className="h-4 w-4" />
         </ToolbarButton>
-        <ToolbarButton title="Insert image" onClick={addImage}>
-          <ImageIcon className="h-4 w-4" />
+        <ToolbarButton title="Insert image (upload)" onClick={addImage} disabled={uploadingImage}>
+          {uploadingImage ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImageIcon className="h-4 w-4" />}
         </ToolbarButton>
+        {/* Hidden file input for image upload */}
+        <input
+          ref={imageInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+          className="hidden"
+          onChange={handleImageFile}
+        />
 
         <ToolbarDivider />
 

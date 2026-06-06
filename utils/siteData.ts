@@ -9,7 +9,7 @@ export const doctor = {
   specialization: "Orthopedic Surgeon",
   qualification: "MS (Orthopedics) — SMS Medical College, Jaipur ",
   experience: "1 Year in Healthcare",
-  phone: "+91 98765 43210",
+  phone: "+91 7500230476",
   image: "/doctor-headshot.png",   // swap path to update the photo
 };
 
@@ -158,6 +158,7 @@ export const painAreasContent = {
     {
       id: "spine",
       label: "Spine",
+      hotspot: { position: "0.02m 1.05m 0.08m", normal: "0m 0m 1m" },
       symptoms: [
         "Low back pain",
         "Neck pain",
@@ -175,6 +176,7 @@ export const painAreasContent = {
     {
       id: "shoulder",
       label: "Shoulder",
+      hotspot: { position: "-0.1m 1.4m 0.05m", normal: "0m 0m 1m" },
       symptoms: [
         "Rotator cuff injury",
         "Shoulder impingement",
@@ -186,6 +188,7 @@ export const painAreasContent = {
     {
       id: "elbow",
       label: "Elbow",
+      hotspot: { position: "-0.2m 1.1m 0.02m", normal: "0m 0m 1m" },
       symptoms: [
         "Tennis elbow",
         "Golfer's elbow",
@@ -196,6 +199,7 @@ export const painAreasContent = {
     {
       id: "hand-wrist",
       label: "Hand/Wrist",
+      hotspot: { position: "-0.28m 0.8m 0.02m", normal: "0m 0m 1m" },
       symptoms: [
         "Carpal tunnel syndrome",
         "Wrist sprain",
@@ -206,6 +210,7 @@ export const painAreasContent = {
     {
       id: "hip",
       label: "Hip",
+      hotspot: { position: "-0.10m 0.9m 0.07m", normal: "0m 0m 1m" },
       symptoms: [
         "Hip arthritis",
         "Hip labral tear",
@@ -216,6 +221,7 @@ export const painAreasContent = {
     {
       id: "knee",
       label: "Knee",
+      hotspot: { position: "-0.09m 0.42m 0.1m", normal: "0m 0m 1m" },
       symptoms: [
         "Knee osteoarthritis",
         "ACL/PCL injury",
@@ -226,6 +232,7 @@ export const painAreasContent = {
     {
       id: "foot-ankle",
       label: "Foot/Ankle",
+      hotspot: { position: "-0.09m 0.06m 0.1m", normal: "0m 0m 1m" },
       symptoms: [
         "Ankle sprain instability",
         "Plantar fasciitis",
@@ -234,8 +241,7 @@ export const painAreasContent = {
       ],
     },
   ],
-  centerImage:
-    "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1200",
+  skeletonModel: "/overview-skeleton.glb",
 } as const;
 
 // ── Treatments Section ────────────────────────────────────────
@@ -357,7 +363,6 @@ export const footerContent = {
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "Patient Education", href: "/patient-education" },
-    { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
   ],
   legalLinks: ["Privacy Policy", "Disclaimer", "Sitemap"],

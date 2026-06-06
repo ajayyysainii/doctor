@@ -40,11 +40,6 @@ export default function AboutSection() {
             <p className="text-gray-600 text-lg sm:text-[19px] leading-[1.8] mb-10 font-medium max-w-2xl">
               {aboutContent.description}
             </p>
-
-            <button className="bg-black text-white px-8 py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 mb-14 border border-black/10">
-              MORE ABOUT US
-            </button>
-
             <div className="w-full h-px bg-gray-200 mb-12"></div>
 
             {/* Two columns text */}

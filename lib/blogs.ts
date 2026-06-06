@@ -99,6 +99,32 @@ export async function getAllBlogsAdmin(): Promise<Blog[]> {
   return blogs.map(toPlainBlog);
 }
 
+export async function getBlogsAdminPage(
+  page: number,
+  perPage: number
+): Promise<{ blogs: Blog[]; total: number }> {
+  const col = await getBlogsCollection();
+  const skip = (page - 1) * perPage;
+  const [blogs, total] = await Promise.all([
+    col.find({}).sort({ _id: -1 }).skip(skip).limit(perPage).toArray(),
+    col.countDocuments({}),
+  ]);
+  return { blogs: blogs.map(toPlainBlog), total };
+}
+
+export async function getPublishedBlogsPage(
+  page: number,
+  perPage: number
+): Promise<{ blogs: Blog[]; total: number }> {
+  const col = await getBlogsCollection();
+  const skip = (page - 1) * perPage;
+  const [blogs, total] = await Promise.all([
+    col.find(publishedFilter).sort({ _id: -1 }).skip(skip).limit(perPage).toArray(),
+    col.countDocuments(publishedFilter),
+  ]);
+  return { blogs: blogs.map(toPlainBlog), total };
+}
+
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   const blogs = await getAllPublishedBlogs();
   return blogs.find((blog) => blog.slug === slug) ?? null;
