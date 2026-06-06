@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { BlogImage } from "@/components/BlogImage";
+import { getBlogFeaturedImage } from "@/utils/blogImage";
 import { getAllBlogs, type Blog } from "@/utils/blogs";
-
-const FALLBACK_IMAGE = "/image.png";
-
-function getBlogImage(blog: Blog) {
-  return blog.image?.trim() || FALLBACK_IMAGE;
-}
 
 export default async function FeaturedSection() {
   const blogs = (await getAllBlogs()).slice(0, 3);
@@ -44,9 +40,9 @@ function FeaturedCard({ blog }: { blog: Blog }) {
       href={`/patient-education/${blog.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#008de4]/30 hover:shadow-[0_18px_42px_rgba(0,141,228,0.12)]"
     >
-      <div className="aspect-16/10 overflow-hidden bg-gray-100">
-        <img
-          src={getBlogImage(blog)}
+      <div className="aspect-[16/10] overflow-hidden bg-gray-100">
+        <BlogImage
+          src={getBlogFeaturedImage(blog.image)}
           alt={blog.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
