@@ -2,14 +2,10 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { getAllBlogs, type Blog } from "@/utils/blogs";
 
-const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800",
-];
+const FALLBACK_IMAGE = "/image.png";
 
-function getBlogImage(index: number) {
-  return FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+function getBlogImage(blog: Blog) {
+  return blog.image?.trim() || FALLBACK_IMAGE;
 }
 
 export default async function FeaturedSection() {
@@ -23,8 +19,8 @@ export default async function FeaturedSection() {
         <p className="text-sm font-bold tracking-[0.18em] text-[#008de4] uppercase">Featured</p>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {blogs.map((blog, index) => (
-            <FeaturedCard key={blog.id} blog={blog} index={index} />
+          {blogs.map((blog) => (
+            <FeaturedCard key={blog.id} blog={blog} />
           ))}
         </div>
 
@@ -42,15 +38,15 @@ export default async function FeaturedSection() {
   );
 }
 
-function FeaturedCard({ blog, index }: { blog: Blog; index: number }) {
+function FeaturedCard({ blog }: { blog: Blog }) {
   return (
     <Link
       href={`/patient-education/${blog.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#008de4]/30 hover:shadow-[0_18px_42px_rgba(0,141,228,0.12)]"
     >
-      <div className="aspect-[16/10] overflow-hidden bg-gray-100">
+      <div className="aspect-16/10 overflow-hidden bg-gray-100">
         <img
-          src={getBlogImage(index)}
+          src={getBlogImage(blog)}
           alt={blog.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />

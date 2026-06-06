@@ -9,8 +9,7 @@ import { BOOK_PATH } from "@/utils/siteUrl";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.orthodrskpalsania.com";
 
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=1200";
+const FALLBACK_IMAGE = "/image.png";
 
 type BlogDetailPageProps = {
   params: Promise<{ slug: string }>;

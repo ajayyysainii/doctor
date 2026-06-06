@@ -39,15 +39,10 @@ export const metadata: Metadata = {
   },
 };
 
-const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=800",
-];
+const FALLBACK_IMAGE = "/image.png";
 
-function getBlogImage(blog: Blog, index: number) {
-  return blog.image?.trim() || FALLBACK_IMAGES[index % FALLBACK_IMAGES.length];
+function getBlogImage(blog: Blog) {
+  return blog.image?.trim() || FALLBACK_IMAGE;
 }
 
 function formatBlogDate(iso: string | null) {
@@ -110,8 +105,8 @@ export default async function BlogListPage({ searchParams }: PageProps) {
             ) : (
               <>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-                  {blogs.map((blog, index) => (
-                    <BlogCard key={blog.id} blog={blog} index={index} />
+                  {blogs.map((blog) => (
+                    <BlogCard key={blog.id} blog={blog} />
                   ))}
                 </div>
 
@@ -133,7 +128,7 @@ export default async function BlogListPage({ searchParams }: PageProps) {
   );
 }
 
-function BlogCard({ blog, index }: { blog: Blog; index: number }) {
+function BlogCard({ blog }: { blog: Blog }) {
   const date = formatBlogDate(blog.createdAt);
 
   return (
@@ -144,7 +139,7 @@ function BlogCard({ blog, index }: { blog: Blog; index: number }) {
       <div className="aspect-16/10 overflow-hidden bg-gray-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={getBlogImage(blog, index)}
+          src={getBlogImage(blog)}
           alt={blog.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
