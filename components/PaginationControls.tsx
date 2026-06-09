@@ -41,26 +41,26 @@ export function PaginationControls({ page, totalPages, total, perPage }: Props) 
   const rangeEnd = total && perPage ? Math.min(page * perPage, total) : null;
 
   return (
-    <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+    <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
       <p className="text-sm text-gray-500">
         {rangeStart && rangeEnd && total ? (
           <>
-            Showing <span className="font-semibold text-gray-700">{rangeStart}–{rangeEnd}</span> of{" "}
-            <span className="font-semibold text-gray-700">{total}</span> articles
+            Showing <span className="font-medium text-gray-700">{rangeStart}–{rangeEnd}</span> of{" "}
+            <span className="font-medium text-gray-700">{total}</span> articles
           </>
         ) : (
           <>
-            Page <span className="font-semibold text-gray-700">{page}</span> of{" "}
-            <span className="font-semibold text-gray-700">{totalPages}</span>
+            Page <span className="font-medium text-gray-700">{page}</span> of{" "}
+            <span className="font-medium text-gray-700">{totalPages}</span>
           </>
         )}
       </p>
 
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1">
         <button
           onClick={() => goTo(page - 1)}
           disabled={page <= 1}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 transition-colors hover:border-[#008de4]/30 hover:bg-[#f2f8fc] disabled:pointer-events-none disabled:opacity-40"
+          className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-40"
           aria-label="Previous page"
         >
           <ChevronLeft className="h-4 w-4" />
@@ -68,7 +68,7 @@ export function PaginationControls({ page, totalPages, total, perPage }: Props) 
 
         {pages.map((p, i) =>
           p === "…" ? (
-            <span key={`ellipsis-${i}`} className="px-1 text-gray-400">
+            <span key={`ellipsis-${i}`} className="px-1.5 text-sm text-gray-400">
               …
             </span>
           ) : (
@@ -76,10 +76,10 @@ export function PaginationControls({ page, totalPages, total, perPage }: Props) 
               key={p}
               onClick={() => goTo(p)}
               className={[
-                "inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 text-sm font-bold transition-colors",
+                "inline-flex h-8 min-w-8 items-center justify-center rounded border px-2.5 text-sm font-medium transition-colors",
                 p === page
-                  ? "border-[#008de4] bg-[#008de4] text-white shadow-sm"
-                  : "border-gray-200 bg-white text-gray-700 hover:border-[#008de4]/30 hover:bg-[#f2f8fc]",
+                  ? "border-[#008de4] bg-[#008de4] text-white"
+                  : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50",
               ].join(" ")}
             >
               {p}
@@ -90,7 +90,7 @@ export function PaginationControls({ page, totalPages, total, perPage }: Props) 
         <button
           onClick={() => goTo(page + 1)}
           disabled={page >= totalPages}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 transition-colors hover:border-[#008de4]/30 hover:bg-[#f2f8fc] disabled:pointer-events-none disabled:opacity-40"
+          className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-40"
           aria-label="Next page"
         >
           <ChevronRight className="h-4 w-4" />

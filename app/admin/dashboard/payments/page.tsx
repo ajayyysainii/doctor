@@ -29,11 +29,13 @@ function inr(paise: number | undefined) {
 }
 
 function statusBadge(status: string) {
-  const base = "inline-flex rounded-full px-2 py-0.5 text-xs font-semibold";
-  if (status === "paid") return `${base} bg-green-100 text-green-700`;
-  if (status === "pending") return `${base} bg-amber-100 text-amber-700`;
-  if (status === "cancelled") return `${base} bg-red-100 text-red-700`;
-  return `${base} bg-gray-100 text-gray-700`;
+  if (status === "paid")
+    return "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-green-50 text-green-700 border border-green-200";
+  if (status === "pending")
+    return "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200";
+  if (status === "cancelled")
+    return "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-red-50 text-red-700 border border-red-200";
+  return "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200";
 }
 
 export default async function PaymentsPage({
@@ -59,15 +61,8 @@ export default async function PaymentsPage({
     .skip(safeSkip)
     .limit(PAGE_SIZE)
     .project({
-      bookingId: 1,
-      patientName: 1,
-      phone: 1,
-      amountInPaise: 1,
-      status: 1,
-      razorpay: 1,
-      createdAt: 1,
-      paidAt: 1,
-      slotStart: 1,
+      bookingId: 1, patientName: 1, phone: 1, amountInPaise: 1,
+      status: 1, razorpay: 1, createdAt: 1, paidAt: 1, slotStart: 1,
     })
     .toArray();
 
@@ -77,103 +72,98 @@ export default async function PaymentsPage({
 
   return (
     <div className="mx-auto max-w-6xl">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
-          <p className="mt-1 text-sm text-gray-600">
-            Razorpay orders and payments tied to each booking. Most recent first.
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-              Paid total (this page)
-            </p>
-            <p className="text-xl font-bold text-gray-900">{inr(totalPaidPaise)}</p>
-          </div>
-          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Records</p>
-            <p className="text-xl font-bold text-gray-900">{totalRecords}</p>
-          </div>
+          <h1 className="text-xl font-semibold text-gray-900">Payments</h1>
+          <p className="mt-0.5 text-sm text-gray-500">Razorpay orders and payments tied to each booking. Most recent first.</p>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+      {/* Stats */}
+      <div className="mb-6 grid grid-cols-2 gap-4 sm:w-fit">
+        <div className="rounded-lg border border-gray-200 bg-white px-5 py-4">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Revenue (this page)</p>
+          <p className="mt-1 text-2xl font-bold text-gray-900">{inr(totalPaidPaise)}</p>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white px-5 py-4">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Total records</p>
+          <p className="mt-1 text-2xl font-bold text-gray-900">{totalRecords}</p>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="rounded-lg border border-gray-200 bg-white overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="px-4 py-3">When</th>
-              <th className="px-4 py-3">Patient</th>
-              <th className="px-4 py-3">Amount</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Order ID</th>
-              <th className="px-4 py-3">Payment ID</th>
-              <th className="px-4 py-3">Slot</th>
+          <thead>
+            <tr className="border-b border-gray-200 bg-gray-50">
+              {["When", "Patient", "Amount", "Status", "Order ID", "Payment ID", "Slot"].map((h) => (
+                <th key={h} className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  {h}
+                </th>
+              ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-100">
             {rows.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-gray-500">
+                <td colSpan={7} className="px-4 py-12 text-center text-sm text-gray-400">
                   No payment records yet.
                 </td>
               </tr>
             ) : (
-              rows.map((r) => {
-                const when = r.paidAt ?? r.createdAt;
-                return (
-                  <tr key={r.bookingId} className="border-t border-gray-100 align-top">
-                    <td className="px-4 py-3 text-gray-800">{formatIst(when)}</td>
-                    <td className="px-4 py-3">
-                      <p className="font-medium text-gray-900">{r.patientName}</p>
-                      <p className="text-xs text-gray-500">{r.phone}</p>
-                    </td>
-                    <td className="px-4 py-3 font-semibold text-gray-900">{inr(r.amountInPaise)}</td>
-                    <td className="px-4 py-3">
-                      <span className={statusBadge(r.status ?? "")}>{r.status ?? "—"}</span>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-gray-600">
-                      {r.razorpay?.orderId ?? "—"}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-gray-600">
-                      {r.razorpay?.paymentId ?? "—"}
-                    </td>
-                    <td className="px-4 py-3 text-xs text-gray-600">{formatIst(r.slotStart)}</td>
-                  </tr>
-                );
-              })
+              rows.map((r) => (
+                <tr key={r.bookingId} className="align-top hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">{formatIst(r.paidAt ?? r.createdAt)}</td>
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-gray-900">{r.patientName}</p>
+                    <p className="text-xs text-gray-400">{r.phone}</p>
+                  </td>
+                  <td className="px-4 py-3 font-semibold text-gray-900">{inr(r.amountInPaise)}</td>
+                  <td className="px-4 py-3">
+                    <span className={statusBadge(r.status ?? "")}>{r.status ?? "—"}</span>
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs text-gray-500 max-w-[130px] truncate">
+                    {r.razorpay?.orderId ?? "—"}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs text-gray-500 max-w-[130px] truncate">
+                    {r.razorpay?.paymentId ?? "—"}
+                  </td>
+                  <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{formatIst(r.slotStart)}</td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-sm text-gray-600">
-          Page {safeCurrentPage} of {totalPages}
+      {/* Pagination */}
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-sm text-gray-500">
+          Page <span className="font-medium text-gray-700">{safeCurrentPage}</span> of{" "}
+          <span className="font-medium text-gray-700">{totalPages}</span>
         </p>
         <div className="flex gap-2">
           {safeCurrentPage > 1 ? (
             <Link
               href={`/admin/dashboard/payments?page=${safeCurrentPage - 1}`}
-              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="rounded border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Previous
             </Link>
           ) : (
-            <span className="rounded-lg border border-gray-100 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-400">
+            <span className="rounded border border-gray-100 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
               Previous
             </span>
           )}
-
           {safeCurrentPage < totalPages ? (
             <Link
               href={`/admin/dashboard/payments?page=${safeCurrentPage + 1}`}
-              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="rounded border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Next
             </Link>
           ) : (
-            <span className="rounded-lg border border-gray-100 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-400">
+            <span className="rounded border border-gray-100 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
               Next
             </span>
           )}

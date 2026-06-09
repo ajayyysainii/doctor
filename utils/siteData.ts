@@ -365,11 +365,41 @@ export const footerContent = {
     { label: "Patient Education", href: "/patient-education" },
     { label: "Contact", href: "#contact" },
   ],
-  legalLinks: ["Privacy Policy", "Disclaimer", "Sitemap"],
-  socialLinks: {
-    twitter: "#",
-    linkedin: "#",
-    dribbble: "#",
-    facebook: "#",
-  },
+  legalLinks: ["Privacy Policy", "Disclaimer"],
+  socialLinks: [
+    {
+      id: "instagram-ortho",
+      platform: "instagram",
+      tag: "Business",
+      href: "https://www.instagram.com/ortho_dr_suresh_palsania?igsh=a2l2cG5rOXQya2t6&utm_source=qr",
+      label: "Instagram — Business — Ortho Dr Suresh Palsania",
+    },
+    {
+      id: "facebook-clinic",
+      platform: "facebook",
+      tag: "Business",
+      href: "https://www.facebook.com/share/194kWvAwgx/?mibextid=wwXIfr",
+      label: "Facebook — Business — Dr Suresh Palsania | Sikar",
+    },
+    {
+      id: "facebook-personal",
+      platform: "facebook",
+      tag: "Personal",
+      href: "https://www.facebook.com/share/17RTU9C2x4/?mibextid=wwXIfr",
+      label: "Facebook — Personal — Suresh Palsania",
+    },
+    {
+      id: "instagram-personal",
+      platform: "instagram",
+      tag: "Personal",
+      href: "https://www.instagram.com/suresh_palsania?igsh=MXdxaDM4NWF5ZHk3aA%3D%3D&utm_source=qr",
+      label: "Instagram — Personal — Suresh Palsania",
+    },
+    {
+      id: "linkedin",
+      platform: "linkedin",
+      href: "https://www.linkedin.com/in/suresh-palsania-849415322?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+      label: "LinkedIn — Suresh Palsania",
+    },
+  ],
 };

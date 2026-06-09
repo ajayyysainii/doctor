@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { getBlogsAdminPage } from "@/lib/blogs";
 import { BlogDeleteButton } from "@/components/admin/BlogDeleteButton";
 import { PaginationControls } from "@/components/admin/PaginationControls";
@@ -8,10 +8,9 @@ import { Suspense } from "react";
 const PER_PAGE = 10;
 
 function statusBadge(published: boolean) {
-  const base = "inline-flex rounded-full px-2 py-0.5 text-xs font-semibold";
   return published
-    ? `${base} bg-green-100 text-green-700`
-    : `${base} bg-amber-100 text-amber-700`;
+    ? "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-green-50 text-green-700 border border-green-200"
+    : "inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200";
 }
 
 function formatDate(iso: string | null) {
@@ -35,33 +34,28 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
 
   const { blogs, total } = await getBlogsAdminPage(page, PER_PAGE);
   const totalPages = Math.ceil(total / PER_PAGE);
-
-  // Clamp to last valid page if ?page= is out of range
   const clampedPage = Math.min(page, Math.max(1, totalPages));
 
   const publishedCount = blogs.filter((b) => b.published).length;
 
   return (
     <div className="mx-auto max-w-6xl">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Blog management</h1>
-          <p className="mt-1 text-sm text-gray-600">
+          <h1 className="text-xl font-semibold text-gray-900">Blog Management</h1>
+          <p className="mt-0.5 text-sm text-gray-500">
             Create and edit patient education articles shown on the public site.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Total</p>
-            <p className="text-xl font-bold text-gray-900">{total}</p>
-          </div>
-          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Published</p>
-            <p className="text-xl font-bold text-gray-900">{publishedCount}</p>
+        <div className="flex items-center gap-3">
+          <div className="flex gap-4 text-sm text-gray-600 border border-gray-200 bg-white rounded-lg px-4 py-2">
+            <span><strong className="text-gray-900">{total}</strong> total</span>
+            <span className="text-gray-300">|</span>
+            <span><strong className="text-gray-900">{publishedCount}</strong> published</span>
           </div>
           <Link
             href="/admin/dashboard/blogs/new"
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
+            className="inline-flex items-center gap-1.5 rounded bg-[#008de4] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             <Plus className="h-4 w-4" />
             New post
@@ -69,21 +63,20 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="rounded-lg border border-gray-200 bg-white overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="px-4 py-3">Title</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Updated</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+          <thead>
+            <tr className="border-b border-gray-200 bg-gray-50">
+              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500">Title</th>
+              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500">Status</th>
+              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500">Updated</th>
+              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-100">
             {blogs.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-12 text-center text-gray-500">
-                  <FileText className="mx-auto mb-2 h-8 w-8 text-gray-300" />
+                <td colSpan={4} className="px-4 py-14 text-center text-sm text-gray-400">
                   {total === 0
                     ? "No blog posts yet. Create your first article."
                     : "No posts on this page."}
@@ -91,10 +84,10 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
               </tr>
             ) : (
               blogs.map((blog) => (
-                <tr key={blog.id} className="border-t border-gray-100 align-top">
-                  <td className="px-4 py-3">
+                <tr key={blog.id} className="hover:bg-gray-50 transition-colors align-top">
+                  <td className="px-4 py-3 max-w-sm">
                     <p className="font-medium text-gray-900">{blog.title}</p>
-                    <p className="mt-0.5 line-clamp-1 text-xs text-gray-500">
+                    <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
                       {blog.excerpt || "No excerpt"}
                     </p>
                   </td>
@@ -103,7 +96,7 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
                       {blog.published ? "Published" : "Draft"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{formatDate(blog.updatedAt)}</td>
+                  <td className="px-4 py-3 text-sm text-gray-500">{formatDate(blog.updatedAt)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-3">
                       {blog.published && (
@@ -111,14 +104,14 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
                           href={`/patient-education/${blog.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs font-medium text-blue-600 hover:underline"
+                          className="text-sm text-[#008de4] hover:underline"
                         >
                           View
                         </a>
                       )}
                       <Link
                         href={`/admin/dashboard/blogs/${blog.id}`}
-                        className="text-xs font-medium text-gray-700 hover:text-gray-900"
+                        className="text-sm text-gray-600 hover:text-gray-900"
                       >
                         Edit
                       </Link>
@@ -132,7 +125,6 @@ export default async function BlogsAdminPage({ searchParams }: PageProps) {
         </table>
       </div>
 
-      {/* PaginationControls uses useSearchParams — wrap in Suspense per Next.js requirement */}
       <Suspense>
         <PaginationControls page={clampedPage} totalPages={totalPages} />
       </Suspense>
