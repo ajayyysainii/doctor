@@ -78,7 +78,7 @@ export default function AboutSection() {
                 href={BOOK_PATH}
                 className="bg-white text-[#008de4] w-full sm:w-auto px-8 py-3.5 rounded-[14px] font-bold text-[15px] hover:bg-gray-50 hover:shadow-md transition-all duration-300 relative z-10 inline-flex items-center justify-center"
               >
-                Book An Appointment
+                Book Appointment
               </Link>
             </div>
           </div>

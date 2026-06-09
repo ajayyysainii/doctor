@@ -79,7 +79,7 @@ export default function HeroSection() {
             onClick={() => setMenuOpen(false)}
             className="w-full bg-[#008de4] text-white py-3.5 rounded-xl font-bold text-[15px] hover:bg-blue-500 transition-colors shadow-lg text-center"
           >
-            Book An Appointment
+            Book Appointment
           </Link>
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function HeroSection() {
             href={BOOK_PATH}
             className="bg-[#008de4] text-white px-6 py-2.5 rounded-sm font-bold text-sm shadow-lg hover:bg-blue-500 transition-colors"
           >
-            LET&apos;S TALK
+            LET&apos;S CONSULT
           </Link>
         </div>
       </nav>
